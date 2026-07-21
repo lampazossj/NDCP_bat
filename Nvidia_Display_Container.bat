@@ -26,24 +26,18 @@ goto incorrectV
 :enable_ndcp
 sc config NVDisplay.ContainerLocalSystem start=auto
 sc start NVDisplay.ContainerLocalSystem
-echo.
-echo.
-echo.
-echo       Ndc is ENABLED!
-echo    ####################
-echo    #     FINISHED     #
-echo    #                  #
-echo    # No reboot needed #
-echo    ####################
-echo.
-pause&exit
+set "state=ENABLED" & goto end
+
 :disable_ndcp
 sc config NVDisplay.ContainerLocalSystem start=disabled
 sc stop NVDisplay.ContainerLocalSystem
+set "state=DISABLED" & goto end
+
+:end
 echo.
 echo.
 echo.
-echo      Ndc is DISABLED!
+echo      Ndc is %state%!
 echo    ####################
 echo    #     FINISHED     #
 echo    #                  #
